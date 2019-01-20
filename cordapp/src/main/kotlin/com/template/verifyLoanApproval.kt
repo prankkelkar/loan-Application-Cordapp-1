@@ -11,7 +11,7 @@ import net.corda.core.utilities.ProgressTracker
 
 @InitiatingFlow
 @StartableByRPC
-class verifyLoanApprovalFlow(val eligibilityID: UniqueIdentifier):FlowLogic<SignedTransaction>() {
+class verifyLoanApprovalFlow(val eligibilityID: UniqueIdentifier, val loanstatus: Boolean):FlowLogic<SignedTransaction>() {
 
     override val progressTracker: ProgressTracker? = ProgressTracker()
 
@@ -31,7 +31,7 @@ class verifyLoanApprovalFlow(val eligibilityID: UniqueIdentifier):FlowLogic<Sign
         val inputState = serviceHub.vaultService.queryBy<LoanState>(vaultLoanQueryCriteria).states.first()
 
         // Create the output state
-        val outputState = inputState.state.data.copy(loanStatus = true)
+        val outputState = inputState.state.data.copy(loanStatus=loanstatus)
 
         // Building the transaction
         val transactionBuilder = TransactionBuilder(notary).

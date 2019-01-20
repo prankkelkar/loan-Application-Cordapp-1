@@ -47,5 +47,5 @@ start verifyEligibilityApprovalFlow eligibilityID: "<Eligibility_LINEAR_ID>", ci
 6. Approve/Reject Loan Application
 InParty B console type:
 ```
-start verifyLoanApprovalFlow eligibilityID: "<Eligibility_LINEAR_ID>"
+start verifyLoanApprovalFlow eligibilityID: "<Eligibility_LINEAR_ID>", loanstatus: true
 ```
