@@ -37,7 +37,7 @@ class verifyLoanApprovalFlow(val eligibilityID: UniqueIdentifier):FlowLogic<Sign
         val transactionBuilder = TransactionBuilder(notary).
                 addInputState(inputState).
                 addOutputState(outputState, LoanContract.ID).
-                addCommand(LoanContract.Commands.LoanApproval(), ourIdentity.owningKey)
+                addCommand(LoanContract.Commands.LoanApproval(), ourIdentity.owningKey, outputState.financeAgency.owningKey)
 
         // Verify transaction Builder
         transactionBuilder.verify(serviceHub)
