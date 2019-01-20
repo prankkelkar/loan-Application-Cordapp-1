@@ -25,7 +25,7 @@ class LoanRequestFlow(val name: String,
         val notary = serviceHub.networkMapCache.notaryIdentities.first()
 
         // Create the output state
-        val outputState = LoanState(name, amount, ourIdentity, bank, null, null, false, UniqueIdentifier())
+        val outputState = LoanState(name, amount, ourIdentity, bank, null, null, UniqueIdentifier())
 
         // Building the transaction
         val transactionBuilder = TransactionBuilder(notary).

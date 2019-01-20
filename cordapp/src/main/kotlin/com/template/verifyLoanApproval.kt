@@ -11,7 +11,7 @@ import net.corda.core.utilities.ProgressTracker
 
 @InitiatingFlow
 @StartableByRPC
-class verifyLoanApprovalFlow(val linearIdentifier: UniqueIdentifier):FlowLogic<SignedTransaction>() {
+class verifyLoanApprovalFlow(val eligibilityID: UniqueIdentifier):FlowLogic<SignedTransaction>() {
 
     override val progressTracker: ProgressTracker? = ProgressTracker()
 
@@ -23,8 +23,12 @@ class verifyLoanApprovalFlow(val linearIdentifier: UniqueIdentifier):FlowLogic<S
 
         // Build the transaction
         // 1. Query loan state by linearId for input state
-        val vaultQueryCriteria = QueryCriteria.LinearStateQueryCriteria(listOf(ourIdentity), listOf(linearIdentifier))
-        val inputState = serviceHub.vaultService.queryBy<LoanState>(vaultQueryCriteria).states.first()
+        val vaultEligibilityQueryCriteria = QueryCriteria.LinearStateQueryCriteria(listOf(ourIdentity), listOf(eligibilityID))
+        val EligibilityStateData = serviceHub.vaultService.queryBy<EligibilityState>(vaultEligibilityQueryCriteria).states.first().state.data
+
+        // 1. Query loan state by linearId for input state
+        val vaultLoanQueryCriteria = QueryCriteria.LinearStateQueryCriteria(listOf(ourIdentity), listOf(EligibilityStateData.loanId))
+        val inputState = serviceHub.vaultService.queryBy<LoanState>(vaultLoanQueryCriteria).states.first()
 
         // Create the output state
         val outputState = inputState.state.data.copy(loanStatus = true)
@@ -33,7 +37,7 @@ class verifyLoanApprovalFlow(val linearIdentifier: UniqueIdentifier):FlowLogic<S
         val transactionBuilder = TransactionBuilder(notary).
                 addInputState(inputState).
                 addOutputState(outputState, LoanContract.ID).
-                addCommand(LoanContract.Commands.CheckEligibility(), ourIdentity.owningKey)
+                addCommand(LoanContract.Commands.LoanApproval(), ourIdentity.owningKey)
 
         // Verify transaction Builder
         transactionBuilder.verify(serviceHub)
