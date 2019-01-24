@@ -1,14 +1,12 @@
 package net.corda.server.controllers
 
-import com.template.EligibilityState
-import com.template.LoanState
+import com.template.State.EligibilityState
 import com.template.verifyCheckEligibilityFlow
 import com.template.verifyEligibilityApprovalFlow
 import net.corda.core.contracts.UniqueIdentifier
 import net.corda.core.utilities.getOrThrow
 import net.corda.server.NodeRPCConnection
 import net.corda.server.models.EligibilitySimpleObj
-import net.corda.server.models.LoanSimpleObj
 import net.corda.server.models.toSimpleObj
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus

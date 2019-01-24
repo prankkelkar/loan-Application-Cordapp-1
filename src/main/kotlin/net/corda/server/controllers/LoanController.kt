@@ -1,8 +1,8 @@
 package net.corda.server.controllers
 
 import com.template.LoanRequestFlow
-import com.template.LoanSchemaV1
-import com.template.LoanState
+import com.template.Schema.LoanSchemaV1
+import com.template.State.LoanState
 import net.corda.core.contracts.UniqueIdentifier
 import net.corda.core.messaging.vaultQueryBy
 import net.corda.core.node.services.Vault

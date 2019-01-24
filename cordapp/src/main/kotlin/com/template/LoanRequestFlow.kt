@@ -1,6 +1,8 @@
 package com.template
 
 import co.paralleluniverse.fibers.Suspendable
+import com.template.Contract.LoanContract
+import com.template.State.LoanState
 import net.corda.core.contracts.UniqueIdentifier
 import net.corda.core.flows.FinalityFlow
 import net.corda.core.flows.FlowLogic

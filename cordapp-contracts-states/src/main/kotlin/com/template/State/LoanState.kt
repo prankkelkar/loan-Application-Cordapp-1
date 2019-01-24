@@ -1,5 +1,6 @@
-package com.template
+package com.template.State
 
+import com.template.Schema.LoanSchemaV1
 import net.corda.core.contracts.LinearState
 import net.corda.core.contracts.UniqueIdentifier
 import net.corda.core.identity.AbstractParty

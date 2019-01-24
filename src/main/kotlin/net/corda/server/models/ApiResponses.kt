@@ -1,7 +1,7 @@
 package net.corda.server.models
 
-import com.template.EligibilityState
-import com.template.LoanState
+import com.template.State.EligibilityState
+import com.template.State.LoanState
 import net.corda.core.identity.Party
 
 fun Party.toSimpleName(): String {

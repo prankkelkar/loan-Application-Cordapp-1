@@ -1,4 +1,4 @@
-package com.template
+package com.template.State
 
 import net.corda.core.contracts.LinearState
 import net.corda.core.contracts.UniqueIdentifier
