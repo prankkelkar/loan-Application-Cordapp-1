@@ -49,3 +49,53 @@ InParty B console type:
 ```
 start verifyLoanApprovalFlow eligibilityID: "<Eligibility_LINEAR_ID>", loanstatus: true
 ```
+
+## Using the CorDapp via the Spring Boot APIs:
+1. Start the Loan Application
+```
+curl -X POST \
+  http://localhost:8080/loan/LoanRequest \
+  -H 'content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW' \
+  -F name=Vardan \
+  -F amount=40000 \
+  -F bank=PartyB
+```
+
+2. Get Linear Id of Loan Application
+```
+curl -X GET http://localhost:8080/loan/GetLoans
+```
+
+3. Send loan application to credit rating Agency
+```
+curl -X POST \
+  http://localhost:8081/eligibility/CheckEligibility \
+  -H 'content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW' \
+  -F loanID=<LOAN_LINEAR_ID> \
+  -F creditRatingAgency=PartyC
+```
+
+4. Get Linear Id of Loan Eligibility
+```
+curl -X GET http://localhost:8080/eligibility/GetEligibilities
+```
+
+5. Create a CIBIL Rating
+InParty C console type:
+```
+curl -X POST \
+  http://localhost:8082/eligibility/VerifyEligibility \
+  -H 'content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW' \
+  -F eligibilityID=<ELIGIBILITY_LINEAR_ID> \
+  -F cibilRating=800
+```
+
+6. Approve/Reject Loan Application
+InParty B console type:
+```
+curl -X POST \
+  http://localhost:8081/loan/LoanApproval \
+  -H 'content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW' \\
+  -F eligibilityID=<ELIGIBILITY_LINEAR_ID> \
+  -F loanStatus=true
+```
