@@ -10,6 +10,12 @@
 2. `cd loan-Application-Cordapp`
 3. `./gradlew deployNodes` - building may take upto a minute (it's much quicker if you already have the Corda binaries).
 4. `./build/nodes/runnodes`
+5. In a new terminal - run partyA API Server
+    ```./gradlew runPartyAServer```
+6. In a new terminal - run partyB API Server
+    ```./gradlew runPartyBServer```
+7. In a new terminal - run partyC API Server
+    ```./gradlew runPartyCServer```
 
 At this point you will have a notary node running as well as three other nodes. l. One for the notary and two for each of the three nodes. The nodes take about 20-30 seconds to finish booting up.There should be 4 console windows in total.
 
@@ -95,7 +101,7 @@ InParty B console type:
 ```
 curl -X POST \
   http://localhost:8081/loan/LoanApproval \
-  -H 'content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW' \\
+  -H 'content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW' \
   -F eligibilityID=<ELIGIBILITY_LINEAR_ID> \
   -F loanStatus=true
 ```
