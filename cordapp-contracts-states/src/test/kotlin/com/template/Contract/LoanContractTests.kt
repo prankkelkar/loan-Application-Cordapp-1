@@ -118,4 +118,30 @@ class TokenContractTests {
             }
         }
     }
+    @Test
+    fun tokenContractRequiresTheTransactionsCommandToBeAnLoanRequestOrLoanApprovalCommand() {
+        ledgerServices.ledger {
+            transaction {
+                // Has wrong command type, will fail.
+                output(LoanContract.ID, loanState)
+                command(alice.publicKey, DummyCommandData)
+                fails()
+            }
+            transaction {
+                // Has correct command type, will verify.
+                output(LoanContract.ID, loanState)
+                command(alice.publicKey, LoanContract.Commands.LoanRequest())
+                verifies()
+
+            }
+            transaction {
+                // Has correct command type, will verify.
+                input(LoanContract.ID, loanState)
+                output(LoanContract.ID, loanState)
+                command(listOf(alice.publicKey, bob.publicKey), LoanContract.Commands.LoanApproval())
+                verifies()
+
+            }
+        }
+    }
 }
