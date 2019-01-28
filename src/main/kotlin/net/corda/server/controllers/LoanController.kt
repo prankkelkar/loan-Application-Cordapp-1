@@ -102,6 +102,7 @@ class LoanController(private val rpc: NodeRPCConnection) {
                     LoanState(
                             state.name,
                             state.amount,
+                            state.panCardNo,
                             possiblyWellKnownFinanceAgency,
                             possiblyWellKnownBank,
                             state.cibilRating,
@@ -133,6 +134,7 @@ class LoanController(private val rpc: NodeRPCConnection) {
                         LoanState(
                                 state.name,
                                 state.amount,
+                                state.panCardNo,
                                 possiblyWellKnownFinanceAgency,
                                 possiblyWellKnownBank,
                                 state.cibilRating,

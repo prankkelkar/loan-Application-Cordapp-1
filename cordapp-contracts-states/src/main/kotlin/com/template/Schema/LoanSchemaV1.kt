@@ -28,6 +28,9 @@ object LoanSchemaV1 : MappedSchema(
             @Column(name = "amount")
             var amount: Int,
 
+            @Column(name = "panCardNo")
+            var panCardNo: String,
+
             @Column(name = "financeAgency")
             var financeAgency: String,
 
@@ -45,6 +48,6 @@ object LoanSchemaV1 : MappedSchema(
 
     ) : PersistentState() {
         // Default constructor required by hibernate.
-        constructor(): this("", 0, "","",null, null, UUID.randomUUID().toString())
+        constructor(): this("", 0, "","","", null, null, UUID.randomUUID().toString())
     }
 }

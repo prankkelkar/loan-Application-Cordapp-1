@@ -35,7 +35,7 @@ class verifyCheckEligibilityFlow(val loanID: UniqueIdentifier,
         val inputStateData = serviceHub.vaultService.queryBy<LoanState>(vaultQueryCriteria).states.first().state.data
 
         // Create the output state
-        val outputState = EligibilityState(inputStateData.name, inputStateData.bank, creditRatingAgency, null, loanID, UniqueIdentifier())
+        val outputState = EligibilityState(inputStateData.name, inputStateData.bank, inputStateData.panCardNo, creditRatingAgency, null, loanID, UniqueIdentifier())
 
         // Building the transaction
         val transactionBuilder = TransactionBuilder(notary).

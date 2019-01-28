@@ -95,6 +95,7 @@ class EligibilityController(private val rpc: NodeRPCConnection) {
                     EligibilityState(
                             state.name,
                             possiblyWellKnownCreditRatingAgency,
+                            state.panCardNo,
                             possiblyWellKnownBank,
                             state.cibilRating,
                             state.loanId,

@@ -14,7 +14,7 @@ class TokenContractTests {
     private val alice = TestIdentity(CordaX500Name("Alice", "", "GB"))
     private val bob = TestIdentity(CordaX500Name("Bob", "", "GB"))
     private val ledgerServices = MockServices(TestIdentity(CordaX500Name("TestId", "", "GB")))
-    private val loanState = LoanState("Jack",5, alice.party, bob.party, 1, null)
+    private val loanState = LoanState("Jack",5, "PANCARD", alice.party, bob.party, 1, null)
 
     @Test
     fun loanContractImplementsContract() {
@@ -94,9 +94,9 @@ class TokenContractTests {
     }
     @Test
     fun tokenContractRequiresTheTransactionsOutputToHaveAPositiveAmount() {
-        val zeroTokenState = LoanState("Jack",-1, alice.party, bob.party, 1, null)
-        val negativeTokenState = LoanState("Jack",0, alice.party, bob.party, 1, null)
-        val positiveTokenState = LoanState("Jack",6, alice.party, bob.party, 1, null)
+        val zeroTokenState = LoanState("Jack",-1, "PANCARD", alice.party, bob.party, 1, null)
+        val negativeTokenState = LoanState("Jack",0, "PANCARD", alice.party, bob.party, 1, null)
+        val positiveTokenState = LoanState("Jack",6, "PANCARD", alice.party, bob.party, 1, null)
         ledgerServices.ledger {
             transaction {
                 // Has zero-amount TokenState, will fail.

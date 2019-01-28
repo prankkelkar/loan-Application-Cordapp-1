@@ -12,12 +12,12 @@ class LoanStateTests{
 
     @Test
     fun loanStateHasParamsOfCorrectTypeInConstructor() {
-        LoanState("Jack",0, alice, bob, 1, null)
+        LoanState("Jack",0, "PANCARD",alice, bob, 1, null)
     }
 
     @Test
     fun loanStateHasGettersForIssuerOwnerAndAmount() {
-        var loanState = LoanState("Jack",0, alice, bob, 1, null)
+        var loanState = LoanState("Jack",0, "PANCARD",alice, bob, 1, null)
         assertEquals(alice, loanState.financeAgency)
         assertEquals(bob, loanState.bank)
         assertEquals(0, loanState.amount)
@@ -25,12 +25,12 @@ class LoanStateTests{
 
     @Test
     fun loanStateImplementsContractState() {
-        assert(LoanState("Jack",0, alice, bob, 1, null) is ContractState)
+        assert(LoanState("Jack",0, "PANCARD",alice, bob, 1, null) is ContractState)
     }
 
     @Test
     fun loanStateHasTwoParticipantsTheFinanceAgencyAndTheBank() {
-        var tokenState = LoanState("Jack",0, alice, bob, 1, null)
+        var tokenState = LoanState("Jack",0, "PANCARD",alice, bob, 1, null)
         assertEquals(2, tokenState.participants.size)
         assert(tokenState.participants.contains(alice))
         assert(tokenState.participants.contains(bob))

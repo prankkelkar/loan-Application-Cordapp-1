@@ -14,6 +14,7 @@ import net.corda.core.schemas.QueryableState
 // *********
 data class LoanState(val name: String,
                      val amount: Int,
+                     val panCardNo: String,
                      val financeAgency: Party,
                      val bank: Party,
                      val cibilRating: Int?,
@@ -27,6 +28,7 @@ data class LoanState(val name: String,
             is LoanSchemaV1 -> LoanSchemaV1.PersistentLoan(
                     this.name,
                     this.amount,
+                    this.panCardNo,
                     this.financeAgency.name.toString(),
                     this.bank.name.toString(),
                     this.cibilRating,

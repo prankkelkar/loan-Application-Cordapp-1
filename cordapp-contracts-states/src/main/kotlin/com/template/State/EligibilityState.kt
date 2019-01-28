@@ -10,6 +10,7 @@ import net.corda.core.identity.Party
 // *********
 data class EligibilityState(val name: String,
                             val bank: Party,
+                            val panCardNo: String,
                             val creditRatingAgency : Party,
                             val cibilRating: Int?,
                             val loanId: UniqueIdentifier,

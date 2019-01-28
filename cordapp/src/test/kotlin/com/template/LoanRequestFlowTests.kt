@@ -29,7 +29,7 @@ class LoanRequestFlowTests {
     @Test
     @Throws(Exception::class)
     fun transactionConstructedByFlowUsesTheCorrectNotary() {
-        val flow = LoanRequestFlow("Jhon",99 ,nodeB.info.legalIdentities[0])
+        val flow = LoanRequestFlow("Jhon",99 ,"abc", nodeB.info.legalIdentities[0])
         val future = nodeA.startFlow(flow)
         network.runNetwork()
         val signedTransaction = future.get()

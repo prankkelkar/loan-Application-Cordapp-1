@@ -16,8 +16,8 @@ import net.corda.core.utilities.ProgressTracker
 
 @InitiatingFlow
 @StartableByRPC
-class verifyEligibilityApprovalFlow(val eligibilityID: UniqueIdentifier,
-                                    val cibilRating: Int):FlowLogic<SignedTransaction>() {
+class verifyEligibilityApprovalFlow(val eligibilityID: UniqueIdentifier
+                                    ):FlowLogic<SignedTransaction>() {
 
     override val progressTracker: ProgressTracker? = ProgressTracker()
 
@@ -26,6 +26,8 @@ class verifyEligibilityApprovalFlow(val eligibilityID: UniqueIdentifier,
         // Get the notary
         val notary = serviceHub.networkMapCache.notaryIdentities.first()
 
+        //Have to get from a notary
+        val cibilRating=77
 
         // Build the transaction
         // 1. Query loan state by linearId for input state
