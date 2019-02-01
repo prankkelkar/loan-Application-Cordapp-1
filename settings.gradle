@@ -1,3 +1,5 @@
 include 'cordapp'
 include 'cordapp-contracts-states'
 include 'clients'
+include 'services'
+

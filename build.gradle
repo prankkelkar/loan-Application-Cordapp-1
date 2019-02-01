@@ -63,10 +63,13 @@ dependencies {
     cordaCompile "$corda_release_group:corda-rpc:$corda_release_version"
     cordaCompile "$corda_release_group:corda-node-api:$corda_release_version"
     cordaRuntime "$corda_release_group:corda:$corda_release_version"
+    cordaCompile "$corda_release_group:corda-webserver-impl:$corda_release_version"
+    cordaRuntime "$corda_release_group:corda-webserver:$corda_release_version"
 
     // CorDapp dependencies.
     cordapp project(":cordapp")
     cordapp project(":cordapp-contracts-states")
+    cordapp project(":services")
 
     cordaCompile "org.apache.logging.log4j:log4j-slf4j-impl:${log4j_version}"
     cordaCompile "org.apache.logging.log4j:log4j-web:${log4j_version}"
@@ -98,7 +101,8 @@ task deployNodes(type: net.corda.plugins.Cordform, dependsOn: ['jar']) {
         }
         cordapps = [
                 "$project.group:cordapp-contracts-states:$project.version",
-                "$project.group:cordapp:$project.version"
+                "$project.group:cordapp:$project.version",
+                "$project.group:services:$project.version",
         ]
     }
     node {
@@ -110,7 +114,8 @@ task deployNodes(type: net.corda.plugins.Cordform, dependsOn: ['jar']) {
         }
         cordapps = [
                 "$project.group:cordapp-contracts-states:$project.version",
-                "$project.group:cordapp:$project.version"
+                "$project.group:cordapp:$project.version",
+                "$project.group:services:$project.version",
         ]
         rpcUsers = [[ user: "user1", "password": "test", "permissions": ["ALL"]]]
     }
@@ -123,7 +128,8 @@ task deployNodes(type: net.corda.plugins.Cordform, dependsOn: ['jar']) {
         }
         cordapps = [
                 "$project.group:cordapp-contracts-states:$project.version",
-                "$project.group:cordapp:$project.version"
+                "$project.group:cordapp:$project.version",
+                "$project.group:services:$project.version",
         ]
         rpcUsers = [[ user: "user1", "password": "test", "permissions": ["ALL"]]]
     }
@@ -136,7 +142,23 @@ task deployNodes(type: net.corda.plugins.Cordform, dependsOn: ['jar']) {
         }
         cordapps = [
                 "$project.group:cordapp-contracts-states:$project.version",
-                "$project.group:cordapp:$project.version"
+                "$project.group:cordapp:$project.version",
+                "$project.group:services:$project.version",
+        ]
+        rpcUsers = [[ user: "user1", "password": "test", "permissions": ["ALL"]]]
+    }
+    node {
+        name "O=Oracle,L=New York,C=US"
+        p2pPort 10014
+        rpcSettings {
+            address("localhost:10015")
+            adminAddress("localhost:10055")
+        }
+        webPort 10010
+        cordapps = [
+                "$project.group:cordapp-contracts-states:$project.version",
+                "$project.group:cordapp:$project.version",
+                "$project.group:services:$project.version",
         ]
         rpcUsers = [[ user: "user1", "password": "test", "permissions": ["ALL"]]]
     }
