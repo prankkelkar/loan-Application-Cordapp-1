@@ -41,7 +41,6 @@ dependencies {
 
     // CorDapp dependencies.
     cordapp project(":cordapp-contracts-states")
-    cordapp project(":services")
 }
 
 task integrationTest(type: Test, dependsOn: []) {

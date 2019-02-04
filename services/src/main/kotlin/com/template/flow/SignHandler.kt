@@ -2,6 +2,8 @@ package com.template.flow
 
 
 import co.paralleluniverse.fibers.Suspendable
+import com.template.QueryCreditRatingFlow
+import com.template.SignCreditRatingFlow
 import com.template.service.Oracle
 import net.corda.core.flows.FlowException
 import net.corda.core.flows.FlowLogic
@@ -13,7 +15,7 @@ import net.corda.core.utilities.unwrap
 
 
 // The oracle flow to sign CreditRating transactions.
-//@InitiatedBy()
+@InitiatedBy(SignCreditRatingFlow::class)
 class SignHandler(val session: FlowSession) : FlowLogic<Unit>() {
     companion object {
         object RECEIVING : ProgressTracker.Step("Receiving sign request.")

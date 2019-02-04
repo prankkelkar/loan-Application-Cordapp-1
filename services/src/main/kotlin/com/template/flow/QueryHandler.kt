@@ -1,6 +1,7 @@
 package com.template.flow
 
 import co.paralleluniverse.fibers.Suspendable
+import com.template.QueryCreditRatingFlow
 import net.corda.core.flows.FlowException
 import net.corda.core.flows.FlowLogic
 import net.corda.core.flows.FlowSession
@@ -10,7 +11,7 @@ import net.corda.core.utilities.unwrap
 import com.template.service.Oracle
 
 // The oracle flow to handle prime-number queries.
-//@InitiatedBy()
+@InitiatedBy(QueryCreditRatingFlow::class)
 class QueryHandler(val session: FlowSession) : FlowLogic<Unit>() {
     companion object {
         object RECEIVING : ProgressTracker.Step("Receiving query request.")

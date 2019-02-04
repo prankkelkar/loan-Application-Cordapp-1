@@ -3,7 +3,6 @@ package com.template
 import co.paralleluniverse.fibers.Suspendable
 import com.template.Contract.EligibilityContract
 import com.template.State.EligibilityState
-import com.template.service.Oracle
 import net.corda.core.contracts.Command
 import net.corda.core.contracts.UniqueIdentifier
 import net.corda.core.flows.FinalityFlow
@@ -11,7 +10,6 @@ import net.corda.core.flows.FlowLogic
 import net.corda.core.flows.InitiatingFlow
 import net.corda.core.flows.StartableByRPC
 import net.corda.core.identity.CordaX500Name
-import net.corda.core.identity.Party
 import net.corda.core.node.services.queryBy
 import net.corda.core.node.services.vault.QueryCriteria
 import net.corda.core.transactions.SignedTransaction
@@ -53,7 +51,6 @@ class verifyEligibilityApprovalFlow(val eligibilityID: UniqueIdentifier
         val transactionBuilder = TransactionBuilder(notary).
                 addInputState(inputState).
                 addOutputState(outputState, EligibilityContract.ID).
-                addCommand(EligibilityContract.Commands.EligibilityApproval(), ourIdentity.owningKey).
                 addCommand(EligibilityContract.Commands.GenerateRating(panCardNo, cibilRating), listOf(oracle.owningKey, ourIdentity.owningKey))
 
         // Verify transaction Builder
