@@ -20,16 +20,17 @@
 At this point you will have a notary node running as well as three other nodes. The nodes take about 20-30 seconds to finish booting up.There should be 4 console windows in total. (Plus 3 terminal for API)
 
 ## Using the CorDapp via the console:
+## Using the CorDapp via the console:
 1. Start the Loan Application
 In PartyA Console type:
 ```
-start LoanRequestFlow name: "Vardan", amount: 30000, bank: "PartyB"
+start LoanRequestFlow name: "Prasanna", amount: 30000, panCardNo: "PRASANNAPAN", bank: "PartyB"
 ```
 
 2. Get Linear Id of Loan Application
 InParty B console type:
 ```
-run vaultQuery contractStateType: com.template.LoanState
+run vaultQuery contractStateType: com.template.State.LoanState
 ```
 
 3. Send loan application to credit rating Agency
@@ -41,13 +42,13 @@ start verifyCheckEligibilityFlow loanID: "<LOAN_LINEAR_ID>", creditRatingAgency:
 4. Get Linear Id of Loan Eligibility
 InParty B console type:
 ```
-run vaultQuery contractStateType: com.template.EligibilityState
+run vaultQuery contractStateType: com.template.State.EligibilityState
 ```
 
 5. Create a CIBIL Rating
 InParty C console type:
 ```
-start verifyEligibilityApprovalFlow eligibilityID: "<Eligibility_LINEAR_ID>", cibilRating: 800
+start verifyEligibilityApprovalFlow eligibilityID: "<Eligibility_LINEAR_ID>"
 ```
 
 6. Approve/Reject Loan Application
